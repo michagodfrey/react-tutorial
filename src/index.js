@@ -1,17 +1,60 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDom from 'react-dom';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+function Booklist() {
+  return (
+    <section className="bookList">
+      <Book />
+      <Book />
+      <Book />
+      <Book />
+      <Book />
+      <Book />
+    </section>
+  );
+}
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// the below is another way to render the html
+// const Greeting = () => {
+//   return React.createElement(
+//     'div',
+//     {},
+//     React.createElement('h1', {}, 'hello world')
+//     );
+// }
+
+// These components can be inseted into other components
+// const Person = () => <h1>John Doe</h1>
+// const Message = () => {
+//   return (
+//     <p>This is a message</p>
+//   );
+// };
+
+const Book = () => {
+  return (
+    <article className="book">
+      <Image />
+      <Title />
+      <Author />
+    </article>
+    
+  )
+}
+
+function Title() {
+  return (
+    <h1>Harry Potter and the Sorcerer's Stone</h1>
+  );
+}
+
+const Image = () => {
+  return <img src="https://m.media-amazon.com/images/I/413lxIe20jL._SY346_.jpg" alt="book"/>
+}
+
+const Author = () => {
+  return <h2>J.K. Rowling</h2>
+}
+
+ReactDom.render(<Booklist />, document.getElementById('root'));
