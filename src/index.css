@@ -28,4 +28,6 @@ body {
 
 .book h1 {
     margin-top: 0.5rem;
+    color: #fff;
+    font-size: '0.75rem';
 }
