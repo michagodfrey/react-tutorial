@@ -5,82 +5,70 @@ import './index.css';
 // variables
 
 const books = [
-  
-]
 
-const firstBook = {
-  // note the syntax, colons and commas as with JS objects
-  author: "J.K. Rowling",
-  title: "Harry Potter Book 1",
-  image: "https://m.media-amazon.com/images/I/413lxIe20jL._SY346_.jpg",
-}
+  {
+    // each list item should have a unique key, id in this case. Notice when Book is returned in BookList, how each object  key is assigned the id of each object
+    id: 1,
+    author: "J.K. Rowling",
+    title: "Harry Potter Book 1",
+    image: "https://m.media-amazon.com/images/I/413lxIe20jL._SY346_.jpg",
+  },
+  {
+    id: 2,
+    author: "Someone Else",
+    title: "Another book",
+    image: "https://m.media-amazon.com/images/I/61gS6EWmWwL.jpg",
+  },
+  {
+    id: 3,
+    author: "Another Person",
+    title: "One more book",
+    image: "https://images-na.ssl-images-amazon.com/images/I/41mAMaGHfqL._SY291_BO1,204,203,200_QL40_FMwebp_.jpg",
+  },
+  {
+    id: 4,
+    author: "A writer",
+    title: "Catepillar book",
+    image: "https://images-na.ssl-images-amazon.com/images/I/41w4B0f21VL._SY349_BO1,204,203,200_.jpg",
+  },
+    
+];
 
-const secondBook = {
-  // note the syntax, colons and commas as with JS objects
-  author: "Someone Else",
-  title: "Another book",
-  image: "https://m.media-amazon.com/images/I/61gS6EWmWwL.jpg",
-}
+// enter newName into the BookList function for the code below
+// below, the array names is passed to newName, which loops over the names with .map, map seems to work just like a for loop, 
+// then returns the name as a h1 element. Without the JSX <h1>{na.. then it renders as tomdickharry. Also, not how the console 
+// log of newName are arrays with lots of metadata
+
+// const names = ['tom', 'dick', 'harry'];
+// const newName = names.map((name) => {
+//   console.log(name)
+//   return <h1>{name}</h1>
+// })
+// console.log(newName);
 
 function Booklist() {
   return (
-    // the p element is a child of Book, note how it is nested
-    <section className="bookList">
-      <Book 
-      image={firstBook.image} 
-      title={firstBook.title} 
-      author={firstBook.author}
-      >
-        <p style={{ color: '#fff'}}>
-          an alternative way to pass the props in this instance would be  and you wouldn't need to do do  or the const
-        </p>
-      </Book>
-      <Book 
-      image={secondBook.image} 
-      title={secondBook.title} 
-      author={secondBook.author}
-      />
+    <section className='bookList'>
+      {books.map((book) => {
+        console.log(book);
+        // an alternative to book={book} is {...book}, it's a spread operator, the idea is all the properties are spread out like an object
+        return <Book key={book.id} book={book}></Book>;
+      })}
     </section>
   );
 }
 
-// the below is another way to render the html
-// const Greeting = () => {
-//   return React.createElement(
-//     'div',
-//     {},
-//     React.createElement('h1', {}, 'hello world')
-//     );
-// }
+const Book = (props) => {
+  console.log(props);
+  const { image, title, author } = props.book;
 
-// These components can be inseted into other components
-// const Person = () => <h1>John Doe</h1>
-// const Message = () => {
-//   return (
-//     <p>This is a message</p>
-//   );
-// };
-
-
-const Book = ({ image, title, author, children }) => {
   return (
-    // an alternative way to use props:
-    // const { image, title, author } = props;
-    // now you'd just use {title} {author} etc
-
-    // an alternative way to pass the props in this instance would be  {props.image} etc with (props) with Book = (props) => 
-
-    // note the inline styling is as JS object, not CSS and has 2 curly braces, this is because it's a javascript object, outer curly brace for JS, inner for the object
     <article className="book">
-      <img 
-        src={image}
-        alt="book"
-      />
+      <img src={image} alt="book"/>
       <h1 style={{color: '#fff', fontSize: '0.75rem'}}>{title}</h1>
       <h2>{author.toUpperCase()}</h2>
-      {children}
     </article>
   )
-}
+};
 
 ReactDom.render(<Booklist />, document.getElementById('root'));
